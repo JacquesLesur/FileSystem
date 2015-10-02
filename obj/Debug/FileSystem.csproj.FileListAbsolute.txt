@@ -4,9 +4,3 @@ E:\EPSI\Documents\Program\algomath\FileSystem\bin\Debug\FileSystem.pdb
 E:\EPSI\Documents\Program\algomath\FileSystem\obj\Debug\FileSystem.exe
 E:\EPSI\Documents\Program\algomath\FileSystem\obj\Debug\FileSystem.pdb
 E:\EPSI\Documents\Program\algomath\FileSystem\obj\Debug\FileSystem.csprojResolveAssemblyReference.cache
-E:\Logiciel\Git\workpace\projetFileSystem\FileSystem\bin\Debug\FileSystem.exe.config
-E:\Logiciel\Git\workpace\projetFileSystem\FileSystem\obj\Debug\FileSystem.exe
-E:\Logiciel\Git\workpace\projetFileSystem\FileSystem\obj\Debug\FileSystem.pdb
-E:\Logiciel\Git\workpace\FileSystem\bin\Debug\FileSystem.exe.config
-E:\Logiciel\Git\workpace\FileSystem\obj\Debug\FileSystem.exe
-E:\Logiciel\Git\workpace\FileSystem\obj\Debug\FileSystem.pdb

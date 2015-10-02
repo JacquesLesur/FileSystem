@@ -67,61 +67,21 @@ namespace FileSystem
                     if (mot1 == "mkdir")
                     {
 
-                        if (curent.IsDirectory() == true) //Vérifi si c'est bien un dossier
+                        bool dossieCree = currentDir.Mkdir(mot2);
+                        if (dossieCree == true)
                         {
-                            if(currentDir.Cd(mot2) == null) //Vérifi si se fihier n'existe pas déjà
-                            {
+                            Console.WriteLine("Dossier Créé");
+                        }
 
-                                bool dossieCree = currentDir.Mkdir(mot2);
-                                if (dossieCree == true)
-                                {
-                                    Console.WriteLine("Dossier Créé");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Erreur, Dossier non créé, vous n'aves pas les droits.");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Se dossier existe déjà");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Tes pas dans un dossier tes dans un fichier");
-                        }
+
                     }
-                    else if (mot1 == "creat") // meme principe que mkdir
+                    else if (mot1 == "create") // meme principe que mkdir
                     {
-
-                        if (curent.IsDirectory() == true)
+                        bool dossieCree = currentDir.CreateNewFile(mot2);
+                        if (dossieCree == true)
                         {
-
-                           if(currentDir.Cd(mot2) == null) //Vérifi si se fihier n'existe pas déjà
-                            {
-                            
-
-                                bool dossieCree = currentDir.CreateNewFile(mot2);
-                                if (dossieCree == true)
-                                {
-                                    Console.WriteLine("Fichier Créé");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Erreur, Dossier non créé, vous n'aves pas les droits.");
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Se Fichier existe déjà");
-                            }
+                            Console.WriteLine("Fichier Créé");
                         }
-                        else
-                        {
-                            Console.WriteLine("Vous ne pouvez pas car vous êtes dans un Fichier");
-                        }
-
                     }
                     else if (mot1 == "ls")
                     {
@@ -150,7 +110,7 @@ namespace FileSystem
                             {
                                 wer = "*";
                             }
-                            
+
                             if (f.CanExecute() == true)
                             {
                                 wer += "E";
@@ -159,7 +119,7 @@ namespace FileSystem
                             {
                                 wer += "*";
                             }
-                            
+
                             if (f.CanRead() == true)
                             {
                                 wer += "R";
@@ -175,29 +135,20 @@ namespace FileSystem
                     }
                     else if (mot1 == "cd")
                     {
-                        if (curent.IsDirectory() == true)
+                        File dossierCd = currentDir.Cd(mot2);
+                        if (dossierCd != null)      //Si dossier n'est pas null: remplacer le courent par le fichier voulu
                         {
-                            
-                            File dossierCd = currentDir.Cd(mot2);
-                            if (dossierCd != null)      //Si dossier n'est pas null: remplacer le courent par le fichier voulu
-                            {
-                                curent = dossierCd;
-                            }
-                            else
-                            {
-                                Console.WriteLine("Ce dossier n'existe pas");
-                            }
+                            curent = dossierCd;
                         }
                         else
                         {
-                            Console.WriteLine("Vous ne pouvez pas car vous êtes dans un Fichier");
+                            Console.WriteLine("Ce dossier n'existe pas");
                         }
                     }
                     else if (mot1 == "parent")
                     {
 
                         if (curent.racine == true) //Vérifi si vous n'êtes pas au bout du monde
-
                         {
                             Console.WriteLine("Vous êtes a la racine");
                         }
@@ -243,37 +194,25 @@ namespace FileSystem
                     {
                         if (curent.IsDirectory() == true)
                         {
-                            if (mot3 != null) //vérifi si le nouveau mot n'est pas nul
+                            if (currentDir.Cd(mot2) != null) // vérifier que le fichier existe
                             {
-                                if (currentDir.Cd(mot2) != null) // vérifier que le fichier existe
+                                File fichierRenomer = currentDir.Cd(mot2);
+                                bool reponse = fichierRenomer.RenameTo(mot3);
+                                if (reponse == true)
                                 {
-                                    if (currentDir.Cd(mot3) == null) // vérifier que le nouveau nom n'existe pas
-                                    {
-                                        File fichierRenomer = currentDir.Cd(mot2);
-                                        bool reponse = fichierRenomer.RenameTo(mot3);
-                                        if (reponse == true)
-                                        {
-                                            Console.WriteLine("Fichier Bien renomé");
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Fichier non renomé, vérifié que vous aves bien les droits");
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Un fichier à déjà se nom");
-                                    }
+                                    Console.WriteLine("Fichier Bien renomé");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Vous devez mêtre un nom au dossier");
+                                    Console.WriteLine("Fichier non renomé !");
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("Ce fichier n'existe pas !");
+
                             }
+
                         }
                         else
                         {
@@ -309,22 +248,13 @@ namespace FileSystem
                     {
                         if (curent.IsDirectory() == true) // vérifi que l'on se trouve bien dans un dossier
                         {
-                            if (currentDir.Cd(mot2) != null)// que le dossier existe
+
+                            bool estSuppr = currentDir.Delete(mot2);
+                            if (estSuppr == true)
                             {
-                                bool estSuppr = currentDir.Delete(mot2);
-                                if (estSuppr == true)
-                                {
-                                    Console.WriteLine("Fichier supprimé");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Fichier non supprimmé, vous n'avez pas les droits");
-                                }
+                                Console.WriteLine("Fichier supprimé");
                             }
-                            else
-                            {
-                                Console.WriteLine("Ce fichier n'existe pas !");
-                            }
+
                         }
                         else
                         {

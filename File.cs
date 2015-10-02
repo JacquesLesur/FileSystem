@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileSystem
 {
-    class File
+    public class File
     {
         string name;
         Directory parent;
@@ -22,23 +22,49 @@ namespace FileSystem
         {
             this.name = name;
             this.parent = parent;
-            
+
         }
-        public string GetName(){
-        return name;
+        public string GetName()
+        {
+            return name;
         }
         public bool RenameTo(string name)
         {
-           
-            if (this.CanWrite() == true) //Vérifi que l'on peu écrir dans le fichier en cours
+            Directory Dossier = (Directory)this.parent;
+            if (name != "") //vérifi si le nouveau mot n'est pas nul
             {
-                this.name = name;
-                return true;
+                if (Dossier.CanWrite() == true)
+                {
+
+                    if (Dossier.Cd(name) == null) // vérifier que le nouveau nom n'existe pas
+                    {
+                        
+                            this.name = name;
+                            return true;
+                        
+                        
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("Un fichier à déjà se nom");
+                        return false;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Vous n'avez pas le droit d'écrir dans le fichier parent");
+                    return false;
+                }
+                
             }
             else
             {
+
+                Console.WriteLine("Vous devez mêtre un nom au dossier");
                 return false;
             }
+
         }
         public bool IsDirectory() //demande si c'est un directory
         {
@@ -66,7 +92,7 @@ namespace FileSystem
         {
             return parent;
         }
-        
+
         public string GetPath()
         {
             File path = this;
@@ -83,7 +109,7 @@ namespace FileSystem
             {
                 if (i == 0)
                 {
-                    pathComplet +=nameParent[i];
+                    pathComplet += nameParent[i];
                 }
                 else
                 {
@@ -118,12 +144,12 @@ namespace FileSystem
             {
 
                 root = root.GetParent();
-                
+
             }
             return root;
         }
-        
 
-        
+
+
     }
 }
